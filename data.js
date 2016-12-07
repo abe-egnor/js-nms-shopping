@@ -11,6 +11,7 @@ PARTS = {
   'non-ferrous plate':    {'candensium': 50, 'antrium': 20},
   'circuit board':        {'non-ferrous plate': 1, 'copper wire': 1},
   'glass':                {'coryzagen': 30},
+  'lubricant':            {'mordite': 40},
 
   'Consumable': LABEL,
   'shielding shard':  {'iron': 25},
@@ -219,4 +220,74 @@ PARTS = {
   'phase coolant sigma':          {'microdensity fabric': 2, 'thamium9': 200, 'platinum': 25},
   'phase coolant tau':            {'heridium': 150, 'thamium9': 200, 'platinum': 50},
   'phase coolant theta':          {'dimensional matrix': 1, 'thamium9': 200, 'copper': 200},
+
+  'Tech': LABEL,
+  'beacon':                 {'voltaic cell': 1, 'carite sheet': 2},
+  'save point':             {'platinum': 50, 'iron': 100},
+  'signal booster':         {'iron': 50, 'platinum': 25},
+  'landing pad':            {'voltaic cell': 2, 'non-ferrous plate': 10, 'lubricant': 1},
+  'communications station': {'iron': 20},
+
+  'Farming': LABEL,
+  'hydroponic tray':    {'iron': 25, 'zinc': 5},
+  'dicotyl':            {'thamium9': 40, 'carbon': 40, 'candensium': 100},  // produces candensium
+  'puffball':           {'thamium9': 40, 'carbon': 20, 'temerium': 100},  // produces temerium
+  'skywort':            {'thamium9': 40, 'carbon': 30, 'coryzagen': 100},  // produces coryzagen
+  'coprite orb':        {'thamium9': 40, 'carbon': 20, 'coprite': 60},  // produces coprite
+  'carrion root':       {'thamium9': 40, 'carbon': 25, 'mordite': 30},  // produces mordite
+  'bloodsbane':         {'thamium9': 100, 'antrium': 100},  // produces sac venom
+  'gravitino orb':      {'thamium9': 100, 'antrium': 120},  // produces gravitino ball
+  'albumen pearl orb':  {'thamium9': 100, 'rigogen': 20, 'albumen pearl': 3},  // produces albumen pearl
+
+  'Construction': LABEL,
+  'Structure': LABEL_NOSPACE,
+  'foundation':                         {'iron': 100},
+  'cylindrical room':                   {'iron': 100},
+  'corridor':                           {'iron': 20},
+  'glass roofed corridor':              {'iron': 30, 'glass': 1, 'heridium': 10},
+  'Room Parts': LABEL_NOSPACE,
+  'door':                               {'iron': 20},
+  'access ramp':                        {'iron': 20},
+  'ladder':                             {'iron': 50},
+  'window':                             {'iron': 30, 'glass': 1},
+  'Cuboid Rooms': LABEL_NOSPACE,
+  'cuboid room':                        {'iron': 100},
+  'window (large cuboid)':              {'heridium': 10, 'glass': 1},
+  'cuboid room foundation strut quad':  {'iron': 20},
+  'cuboid room foundation strut':       {'iron': 20},
+  'cuboid room flooring':               {'iron': 30},
+  'Infrastructure': LABEL_NOSPACE,
+  'decoration (garage door)':           {'iron': 20},
+  'infrastructure (platonic solid)':    {'carbon': 20},
+  'paving':                             {'iron': 20},
+  'Containers': LABEL_NOSPACE,
+  'storage container':                  {'iron': 50, 'voltaic cell': 2},
+  'Specialist Terminals': LABEL_NOSPACE,
+  'terminal':                           {'iron': 50},
+  'Lights': LABEL_NOSPACE,
+  'light':                              {'heridium': 10, 'voltaic cell': 1},
+
+  'Decorations': LABEL,
+  'Decoration': LABEL_NOSPACE,
+  'decoration (desk)': {'iron': 20},
+  'decoration (gun rack)': {'iron': 20, 'zinc': 10},
+  'decoration (plants)': {'iron': 20},
+  'decoration (screen table)': {'iron': 20},
+  'decoration (light ring)': {'heridium': 10, 'voltaic cell': 1},
+  'decoration (screen arm)': {'iron': 20, 'zinc': 10},
+  'decoration (bullseye)': {'iron': 20},
+  'decoration (cabinet)': {'iron': 20},
+  'decoration (fuel pod)': {'voltaic cell': 10, 'glass': 5, 'dynamic resonator': 2},
+  'decoration (lockbox)': {'voltaic cell': 10, 'copper wire': 5, 'dynamic resonator': 1},
+  'decoration (flag)': {'iron': 20, 'heridium': 10},
+  'chair': {'iron': 30},
+  'table': {'iron': 30},
+  'tech panel': {'iron': 30, 'zinc': 10},
+  'wall screen': {'iron': 30, 'zinc': 10},
+  'wall fan': {'iron': 30, 'zinc': 10},
+  'potted plant': {'iron': 30, 'zinc': 10},
+  'wall unit': {'iron': 30},
+  'bed': {'iron': 30},
+  'Decals': LABEL_NOSPACE,
+  'decal': {'iron': 10},
 };
