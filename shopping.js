@@ -82,9 +82,9 @@ Item.prototype.render = function(widget) {
       var b = document.createElement('button');
       b.appendChild(document.createTextNode('\u2713'));
       b.addEventListener('click', function(dep) { return function() {
-	console.log('Tick');
-	dep.markDone(!dep.done);
-	redraw();
+        console.log('Tick');
+        dep.markDone(!dep.done);
+        redraw();
       }}(this.deps[i]));
       deplist.appendChild(this.deps[i].render(b));
     }
@@ -110,6 +110,10 @@ function onLoad() {
       partSelect.appendChild(spacer);
     } else if (PARTS[part] == LABEL_NOSPACE) {
       opt.disabled = true;
+    } else for (var dep in PARTS[part]) {
+      if (!(dep in PARTS)) {
+        alert('Part <' + part + '> has invalid dependency <' + dep + '>');
+      }
     }
     partSelect.appendChild(opt);
     first = false;
