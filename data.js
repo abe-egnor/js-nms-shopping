@@ -6,6 +6,11 @@ PARTS = {
   'electron vapor':       {'suspension fluid': 1, 'plutonium': 100},
   'antimatter':           {'electron vapor': 1, 'heridium': 50, 'zinc': 20},
   'dynamic resonator':    {'antimatter': 1, 'chrysonite': 100, 'microdensity fabric': 4},
+  'voltaic cell':         {'antrium': 50},
+  'copper wire':          {'rigogen': 20},
+  'non-ferrous plate':    {'candensium': 50, 'antrium': 20},
+  'circuit board':        {'non-ferrous plate': 1, 'copper wire': 1},
+  'glass':                {'coryzagen': 30},
 
   'Consumable': LABEL,
   'shielding shard':  {'iron': 25},
