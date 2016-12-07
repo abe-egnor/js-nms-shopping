@@ -234,6 +234,7 @@ PARTS = {
   'dicotyl':            {'thamium9': 40, 'carbon': 40, 'candensium': 100},  // produces candensium
   'puffball':           {'thamium9': 40, 'carbon': 20, 'temerium': 100},  // produces temerium
   'skywort':            {'thamium9': 40, 'carbon': 30, 'coryzagen': 100},  // produces coryzagen
+  'cucrassula':         {'thamium9': 40, 'carbon': 30, 'spadonium': 100},  // produces spadonium
   'coprite orb':        {'thamium9': 40, 'carbon': 20, 'coprite': 60},  // produces coprite
   'carrion root':       {'thamium9': 40, 'carbon': 25, 'mordite': 30},  // produces mordite
   'bloodsbane':         {'thamium9': 100, 'antrium': 100},  // produces sac venom
