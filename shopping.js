@@ -1,11 +1,45 @@
-var Item = function(name, count) {
-  this.name = name;
-  this.count = count;
-  this.done = false;
-  this.deps = [];
-  for (var dep in PARTS[this.name]) {
-    this.deps.push(new Item(dep, count*PARTS[this.name][dep]));
+var Item = function(json) {
+  if ('name' in json) {
+    this.name = json.name;
+  } else {
+    this.name = '???';
   }
+  if ('count' in json) {
+    this.count = json.count;
+  } else {
+    this.count = 1;
+  }
+  if ('done' in json) {
+    this.done = json.done;
+  } else {
+    this.done = false;
+  }
+  if ('deps' in json) {
+    this.deps = [];
+    var len = json.deps.length;
+    for (var i = 0; i < len; ++i) {
+      this.deps.push(new Item(json.deps[i]));
+    }
+  } else {
+    this.deps = [];
+    for (var dep in PARTS[this.name]) {
+      this.deps.push(new Item({'name': dep, 'count': this.count*PARTS[this.name][dep]}));
+    }
+  }
+}
+
+Item.prototype.toJSON = function() {
+  var json = {
+    'name': this.name,
+    'count': this.count,
+    'done': this.done,
+    'deps': [],
+  };
+  var len = this.deps.length;
+  for (var i = 0; i < len; ++i) {
+    json.deps.push(this.deps[i].toJSON());
+  }
+  return json;
 }
 
 Item.prototype.render = function(widget) {
@@ -41,6 +75,8 @@ Item.prototype.render = function(widget) {
   return out;
 }
 
+var SHOPPING = [];
+
 function onLoad() {
   var partSelect = document.getElementById('part');
   for (var part in PARTS) {
@@ -49,10 +85,18 @@ function onLoad() {
     opt.appendChild(document.createTextNode(part));
     partSelect.appendChild(opt);
   }
+
+  var shoppingStr = localStorage.getItem('shopping');
+  if (shoppingStr) {
+    var shoppingJSON = JSON.parse(shoppingStr);
+    var len = shoppingJSON.list.length;
+    for (var i = 0; i < len; ++i) {
+      SHOPPING.push(new Item(shoppingJSON.list[i]));
+    }
+  }
+
   redraw();
 }
-
-var SHOPPING = [];
 
 function redraw() {
   var content = document.getElementById('content');
@@ -71,10 +115,16 @@ function redraw() {
     topList.appendChild(SHOPPING[i].render(del));
   }
   content.appendChild(topList);
+
+  var shoppingJSON = {'list':[]};
+  for (var i = 0; i < len; ++i) {
+    shoppingJSON.list.push(SHOPPING[i].toJSON());
+  }
+  localStorage.setItem('shopping', JSON.stringify(shoppingJSON));
 }
 
 function addItem() {
   console.log('Add Item');
-  SHOPPING.push(new Item(document.getElementById('part').value, document.getElementById('count').value));
+  SHOPPING.push(new Item({'name': document.getElementById('part').value, 'count': parseInt(document.getElementById('count').value)}));
   redraw();
 }
