@@ -13,6 +13,8 @@ PARTS = {
   'glass':                {'coryzagen': 30},
   'lubricant':            {'mordite': 40},
   'insulating gel':       {'spadonium': 40, 'temerium': 40},
+  'poly-fibre':           {'fervidium': 100},
+  'acid':                 {'temerium': 40},
 
   'Consumable': LABEL,
   'shielding shard':  {'iron': 25},
