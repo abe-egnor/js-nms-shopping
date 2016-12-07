@@ -3,8 +3,18 @@ PARTS = {
   'carite sheet':         {'iron': 50},
   'microdensity fabric':  {'iron': 50, 'platinum': 10},
   'suspension fluid':     {'carbon': 50},
-  'electron vapor':       {'suspension fluid': 1, 'plutonium': 1000},
+  'electron vapor':       {'suspension fluid': 1, 'plutonium': 100},
   'antimatter':           {'electron vapor': 1, 'heridium': 50, 'zinc': 20},
+  'dynamic resonator':	  {'antimatter': 1, 'chrysonite': 100, 'microdensity fabric': 4},
+  // Energy
+  'shielding shard':	  {'iron': 25},
+  'shielding plate':	  {'iron': 50},
+  'shielding sheet':	  {'iron': 75},
+  'power gel':		  {'carbon': 25},
+  'power canister':	  {'carbon': 50},
+  'power reservoir':	  {'carbon': 75},
+  'unstable plasma':	  {'thamium9': 400, 'plutonium': 200},
+  'warp cell':		  {'thamium9': 100, 'antimatter': 1},
   // Oxides
   'iron':         {},
   'zinc':         {},
@@ -43,4 +53,12 @@ PARTS = {
   'murrine':      {},
   'calium':       {},
   'cymatygen':    {},
+  // Alloy
+  'aronium':	  {'iron': 50, 'carbon': 50},
+  'crolium':	  {'iridium': 100, 'chrysonite': 80},
+  'grantine':	  {'iridium': 150, 'copper': 50, 'aronium': 1},
+  'herox':	  {'platinum': 20, 'zinc': 20},
+  'lemmium':	  {'titanium': 100, 'plutonium': 200},
+  'magmox':	  {'carbon': 30, 'thamium9': 300, 'plutonium': 300},
+  'terumin':	  {'emeril': 40, 'gold': 40, 'herox': 1},
 };
