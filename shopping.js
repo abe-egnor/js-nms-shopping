@@ -70,13 +70,12 @@ Item.prototype.render = function(widget) {
     for (var i = 0; i < len; ++i) {
       var b = document.createElement('button');
       b.appendChild(document.createTextNode('\u2713'));
-      var dep = this.deps[i];
-      b.addEventListener('click', function() {
+      b.addEventListener('click', function(dep) { return function() {
 	console.log('Tick');
 	dep.markDone(!dep.done);
 	redraw();
-      });
-      deplist.appendChild(dep.render(b));
+      }}(this.deps[i]));
+      deplist.appendChild(this.deps[i].render(b));
     }
     out.appendChild(deplist);
   }
