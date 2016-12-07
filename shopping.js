@@ -42,6 +42,14 @@ Item.prototype.toJSON = function() {
   return json;
 }
 
+Item.prototype.markDone = function(value) {
+  this.done = value;
+  var len = this.deps.length;
+  for (var i = 0; i < len; ++i) {
+    this.deps[i].markDone(value);
+  }
+}
+
 Item.prototype.render = function(widget) {
   var out = document.createElement('li');
   if (widget) {
@@ -65,7 +73,7 @@ Item.prototype.render = function(widget) {
       var dep = this.deps[i];
       b.addEventListener('click', function() {
 	console.log('Tick');
-	dep.done = !dep.done;
+	dep.markDone(!dep.done);
 	redraw();
       });
       deplist.appendChild(dep.render(b));
@@ -105,12 +113,11 @@ function redraw() {
   var len = SHOPPING.length;
   for (var i = 0; i < len; ++i) {
     var del = document.createElement('button');
-    var delIx = i;
-    del.addEventListener('click', function() {
+    del.addEventListener('click', function(delIx) { return function() {
       console.log('Del ' + delIx);
       SHOPPING.splice(delIx, 1);
       redraw();
-    });
+    } }(i));
     del.appendChild(document.createTextNode('-'));
     topList.appendChild(SHOPPING[i].render(del));
   }
