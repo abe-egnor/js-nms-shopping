@@ -14,6 +14,11 @@ var Item = function(json) {
   } else {
     this.done = false;
   }
+  if ('note' in json) {
+    this.note = json.note;
+  } else {
+    this.note = '';
+  }
   if ('deps' in json) {
     this.deps = [];
     var len = json.deps.length;
@@ -33,6 +38,7 @@ Item.prototype.toJSON = function() {
     'name': this.name,
     'count': this.count,
     'done': this.done,
+    'note': this.note,
     'deps': [],
   };
   var len = this.deps.length;
@@ -64,6 +70,11 @@ Item.prototype.render = function(widget) {
     nameElt = out;
   }
   nameElt.appendChild(document.createTextNode(this.count + 'x ' + this.name));
+  if (this.note) {
+    var i = document.createElement('i');
+    i.appendChild(document.createTextNode(' (' + this.note + ')'));
+    nameElt.appendChild(i);
+  }
   var len = this.deps.length;
   if (len > 0) {
     var deplist = document.createElement('ul');
@@ -83,6 +94,8 @@ Item.prototype.render = function(widget) {
 }
 
 var SHOPPING = [];
+var LABEL_NOSPACE = '__label_nospace__';
+var LABEL = '__label__';
 
 function onLoad() {
   var partSelect = document.getElementById('part');
@@ -90,7 +103,16 @@ function onLoad() {
     var opt = document.createElement('option');
     opt.value = part;
     opt.appendChild(document.createTextNode(part));
+    if (PARTS[part] == LABEL) {
+      opt.disabled = true;
+      var spacer = document.createElement('option');
+      spacer.disabled = true;
+      partSelect.appendChild(spacer);
+    } else if (PARTS[part] == LABEL_NOSPACE) {
+      opt.disabled = true;
+    }
     partSelect.appendChild(opt);
+    first = false;
   }
 
   var shoppingStr = localStorage.getItem('shopping');
@@ -131,6 +153,11 @@ function redraw() {
 
 function addItem() {
   console.log('Add Item');
-  SHOPPING.push(new Item({'name': document.getElementById('part').value, 'count': parseInt(document.getElementById('count').value)}));
+  var spec = {
+    'name': document.getElementById('part').value,
+    'count': parseInt(document.getElementById('count').value),
+    'note': document.getElementById('note').value,
+  };
+  SHOPPING.push(new Item(spec));
   redraw();
 }

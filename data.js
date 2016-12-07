@@ -1,12 +1,13 @@
 PARTS = {
-  // Components
+  'Component':		  LABEL_NOSPACE,
   'carite sheet':         {'iron': 50},
   'microdensity fabric':  {'iron': 50, 'platinum': 10},
   'suspension fluid':     {'carbon': 50},
   'electron vapor':       {'suspension fluid': 1, 'plutonium': 100},
   'antimatter':           {'electron vapor': 1, 'heridium': 50, 'zinc': 20},
   'dynamic resonator':	  {'antimatter': 1, 'chrysonite': 100, 'microdensity fabric': 4},
-  // Energy
+
+  'Energy':		  LABEL,
   'shielding shard':	  {'iron': 25},
   'shielding plate':	  {'iron': 50},
   'shielding sheet':	  {'iron': 75},
@@ -15,19 +16,22 @@ PARTS = {
   'power reservoir':	  {'carbon': 75},
   'unstable plasma':	  {'thamium9': 400, 'plutonium': 200},
   'warp cell':		  {'thamium9': 100, 'antimatter': 1},
-  // Oxides
+
+  'Base': LABEL,
+  'Oxide':	  LABEL_NOSPACE,
   'iron':         {},
   'zinc':         {},
   'titanium':     {},
-  // Silicates
+  'Silicate':	  LABEL_NOSPACE,
   'heridium':     {},
   'platinum':     {},
   'chrysonite':   {},
-  // Isotopes
+  'Isotope':	  LABEL_NOSPACE,
   'carbon':       {},
   'thamium9':     {},
   'plutonium':    {},
-  // Neutral
+
+  'Neutral':	  LABEL,
   'nickel':       {},
   'iridium':      {},
   'copper':       {},
