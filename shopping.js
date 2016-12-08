@@ -56,18 +56,14 @@ Item.prototype.markDone = function(value) {
   }
 }
 
-Item.prototype.render = function(widget) {
-  var out = document.createElement('li');
-  if (widget) {
-    out.appendChild(widget);
-  }
+Item.prototype.renderTo = function(container) {
   var nameElt;
   if (this.done) {
     var s = document.createElement('s');
-    out.appendChild(s);
+    container.appendChild(s);
     nameElt = s;
   } else {
-    nameElt = out;
+    nameElt = container;
   }
   nameElt.appendChild(document.createTextNode(this.count + '\u00D7 ' + this.name));
   if (this.note) {
@@ -86,11 +82,16 @@ Item.prototype.render = function(widget) {
         dep.markDone(!dep.done);
         redraw();
       }}(this.deps[i]));
-      deplist.appendChild(this.deps[i].render(b));
+      var depItem = document.createElement('li');
+      depItem.appendChild(b);
+      this.deps[i].renderTo(depItem);
+      deplist.appendChild(depItem);
     }
-    out.appendChild(deplist);
+    container.appendChild(deplist);
   }
-  return out;
+}
+
+Item.prototype.tally = function(sum) {
 }
 
 var SHOPPING = [];
@@ -134,7 +135,6 @@ function onLoad() {
 function redraw() {
   var content = document.getElementById('content');
   content.innerHTML = '';
-  var topList = document.createElement('ul');
   var len = SHOPPING.length;
   for (var i = 0; i < len; ++i) {
     var del = document.createElement('button');
@@ -144,9 +144,13 @@ function redraw() {
       redraw();
     } }(i));
     del.appendChild(document.createTextNode('-'));
-    topList.appendChild(SHOPPING[i].render(del));
+    var topDiv = document.createElement('div');
+    topDiv.className = 'top';
+    topDiv.appendChild(del);
+    SHOPPING[i].renderTo(topDiv);
+    content.appendChild(topDiv);
+    //content.appendChild(document.createElement('hr'));
   }
-  content.appendChild(topList);
 
   var shoppingJSON = {'list':[]};
   for (var i = 0; i < len; ++i) {
