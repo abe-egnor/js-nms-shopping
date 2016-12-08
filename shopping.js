@@ -99,7 +99,16 @@ var LABEL_NOSPACE = '__label_nospace__';
 var LABEL = '__label__';
 
 function onLoad() {
-  var partSelect = document.getElementById('part');
+  var partlist = document.getElementById('partlist');
+  for (var part in PARTS) {
+    if (PARTS[part] == LABEL || PARTS[part] == LABEL_NOSPACE) {
+      continue;
+    }
+    var opt = document.createElement('option');
+    opt.value = part;
+    partlist.appendChild(opt);
+  }
+    /*
   for (var part in PARTS) {
     var opt = document.createElement('option');
     opt.value = part;
@@ -119,6 +128,7 @@ function onLoad() {
     partSelect.appendChild(opt);
     first = false;
   }
+    */
 
   var shoppingStr = localStorage.getItem('shopping');
   if (shoppingStr) {
