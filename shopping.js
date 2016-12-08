@@ -69,7 +69,7 @@ Item.prototype.render = function(widget) {
   } else {
     nameElt = out;
   }
-  nameElt.appendChild(document.createTextNode(this.count + 'x ' + this.name));
+  nameElt.appendChild(document.createTextNode(this.count + '\u00D7 ' + this.name));
   if (this.note) {
     var i = document.createElement('i');
     i.appendChild(document.createTextNode(' (' + this.note + ')'));
