@@ -91,7 +91,22 @@ Item.prototype.renderTo = function(container) {
   }
 }
 
-Item.prototype.tally = function(sum) {
+Item.prototype.tally = function(sum, skipDone) {
+  if (skipDone && this.done) {
+    return sum;
+  }
+  var len = this.deps.length;
+  if (len == 0) {
+    if (!(this.name in sum)) {
+      sum[this.name] = 0;
+    }
+    sum[this.name] += this.count;
+  } else {
+    for (var ix = 0; ix < len; ++ix) {
+      this.deps[ix].tally(sum, skipDone);
+    }
+  }
+  return sum;
 }
 
 var SHOPPING = [];
@@ -135,9 +150,27 @@ function onLoad() {
   redraw();
 }
 
+function tallyText(sum) {
+  var text = [];
+  for (var elt in sum) {
+    text.push(sum[elt] + '\u00D7 ' + elt);
+  }
+  return text.join(', ');
+}
+
+function isEmpty(obj) {
+  for (key in obj) {
+    return false;
+  }
+  return true;
+}
+
 function redraw() {
   var content = document.getElementById('content');
   content.innerHTML = '';
+
+  var allTotal = {};
+  var allRemaining = {};
   var len = SHOPPING.length;
   for (var i = 0; i < len; ++i) {
     var del = document.createElement('button');
@@ -151,8 +184,29 @@ function redraw() {
     topDiv.className = 'top';
     topDiv.appendChild(del);
     SHOPPING[i].renderTo(topDiv);
+
+    SHOPPING[i].tally(allTotal);
+    SHOPPING[i].tally(allRemaining, true);
+    var itemTotal = SHOPPING[i].tally({});
+    var itemRemaining = SHOPPING[i].tally({}, true);
+    topDiv.appendChild(document.createTextNode('Total: ' + tallyText(itemTotal)));
+    if (!isEmpty(itemRemaining)) {
+      topDiv.appendChild(document.createElement('br'));
+      topDiv.appendChild(document.createTextNode('Remaining: ' + tallyText(itemRemaining)));
+    }
+
     content.appendChild(topDiv);
-    //content.appendChild(document.createElement('hr'));
+  }
+
+  if (!isEmpty(allTotal)) {
+    var allDiv = document.createElement('div');
+    allDiv.className = 'top';
+    allDiv.appendChild(document.createTextNode('All Total: ' + tallyText(allTotal)));
+    if (!isEmpty(allRemaining)) {
+      allDiv.appendChild(document.createElement('br'));
+      allDiv.appendChild(document.createTextNode('All Remaining: ' + tallyText(allRemaining)));
+    }
+    content.appendChild(allDiv);
   }
 
   var shoppingJSON = {'list':[]};
