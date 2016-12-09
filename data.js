@@ -296,3 +296,9 @@ PARTS = {
   'Decals': LABEL_NOSPACE,
   'decal': {'iron': 10},
 };
+
+NOTES = {
+  'iron': 'rocks, asteroids',
+  'zinc': 'yellow flowers',
+  'antrium': 'glowing cave plants',
+};

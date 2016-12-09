@@ -59,7 +59,9 @@ Item.prototype.markDone = function(value) {
 function partSpan(name) {
   var span = document.createElement('span');
   span.className = 'part';
-  span.title = 'source!';
+  if (name in NOTES) {
+    span.title = NOTES[name];
+  }
   span.appendChild(document.createTextNode(name));
   return span;
 }
@@ -159,12 +161,18 @@ function onLoad() {
   redraw();
 }
 
-function tallyText(sum) {
-  var text = [];
+function tallyDiv(sum) {
+  var div = document.createElement('div');
+  var first = true;
   for (var elt in sum) {
-    text.push(sum[elt] + '\u00D7 ' + elt);
+    if (!first) {
+      div.appendChild(document.createTextNode(', '));
+    }
+    first = false;
+    div.appendChild(document.createTextNode(sum[elt] + '\u00D7'));
+    div.appendChild(partSpan(elt));
   }
-  return text.join(', ');
+  return div;
 }
 
 function isEmpty(obj) {
@@ -198,9 +206,9 @@ function renderTally(total, remaining, prefix) {
 
   var valCol = document.createElement('div');
   valCol.className = 'countColumn';
-  valCol.appendChild(textDiv(tallyText(total)));
+  valCol.appendChild(tallyDiv(total));
   if (!isEmpty(remaining)) {
-    valCol.appendChild(textDiv(tallyText(remaining)));
+    valCol.appendChild(tallyDiv(remaining));
   }
   countBox.appendChild(valCol);
 
