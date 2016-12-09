@@ -99,36 +99,29 @@ var LABEL_NOSPACE = '__label_nospace__';
 var LABEL = '__label__';
 
 function onLoad() {
-  var partlist = document.getElementById('partlist');
+  for (var part in PARTS) {
+    if (PARTS[part] != LABEL && PARTS[part] != LABEL_NOSPACE) {
+      for (var dep in PARTS[part]) {
+        if (!(dep in PARTS)) {
+          alert('Part <' + part + '> has invalid dependency <' + dep + '>');
+        }
+      }
+    }
+  }
+
+  var completions = [];
   for (var part in PARTS) {
     if (PARTS[part] == LABEL || PARTS[part] == LABEL_NOSPACE) {
       continue;
     }
-    var opt = document.createElement('option');
-    opt.value = part;
-    partlist.appendChild(opt);
+    completions.push(part);
   }
-    /*
-  for (var part in PARTS) {
-    var opt = document.createElement('option');
-    opt.value = part;
-    opt.appendChild(document.createTextNode(part));
-    if (PARTS[part] == LABEL) {
-      opt.disabled = true;
-      var spacer = document.createElement('option');
-      spacer.disabled = true;
-      partSelect.appendChild(spacer);
-    } else if (PARTS[part] == LABEL_NOSPACE) {
-      opt.disabled = true;
-    } else for (var dep in PARTS[part]) {
-      if (!(dep in PARTS)) {
-        alert('Part <' + part + '> has invalid dependency <' + dep + '>');
-      }
-    }
-    partSelect.appendChild(opt);
-    first = false;
-  }
-    */
+  var partInput = document.getElementById('part');
+  new Awesomplete(partInput, {
+    list: completions,
+    maxItems: 100,
+    sort: function() { return 0; },
+  });
 
   var shoppingStr = localStorage.getItem('shopping');
   if (shoppingStr) {
