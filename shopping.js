@@ -56,6 +56,14 @@ Item.prototype.markDone = function(value) {
   }
 }
 
+function partSpan(name) {
+  var span = document.createElement('span');
+  span.className = 'part';
+  span.title = 'source!';
+  span.appendChild(document.createTextNode(name));
+  return span;
+}
+
 Item.prototype.renderTo = function(container) {
   var nameElt;
   if (this.done) {
@@ -65,7 +73,8 @@ Item.prototype.renderTo = function(container) {
   } else {
     nameElt = container;
   }
-  nameElt.appendChild(document.createTextNode(this.count + '\u00D7 ' + this.name));
+  nameElt.appendChild(document.createTextNode(this.count + '\u00D7'));
+  nameElt.appendChild(partSpan(this.name));
   if (this.note) {
     var i = document.createElement('i');
     i.appendChild(document.createTextNode(' (' + this.note + ')'));
