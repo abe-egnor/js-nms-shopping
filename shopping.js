@@ -165,6 +165,39 @@ function isEmpty(obj) {
   return true;
 }
 
+function textDiv(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div;
+}
+
+function renderTally(total, remaining, prefix) {
+  if (!prefix) {
+    prefix = '';
+  }
+
+  var countBox = document.createElement('div');
+  countBox.className = 'countBox';
+
+  var nameCol = document.createElement('div');
+  nameCol.className = 'countColumn';
+  nameCol.appendChild(textDiv(prefix + 'Total:'));
+  if (!isEmpty(remaining)) {
+    nameCol.appendChild(textDiv(prefix + 'Remaining:'));
+  }
+  countBox.appendChild(nameCol);
+
+  var valCol = document.createElement('div');
+  valCol.className = 'countColumn';
+  valCol.appendChild(textDiv(tallyText(total)));
+  if (!isEmpty(remaining)) {
+    valCol.appendChild(textDiv(tallyText(remaining)));
+  }
+  countBox.appendChild(valCol);
+
+  return countBox;
+}
+
 function redraw() {
   var content = document.getElementById('content');
   content.innerHTML = '';
@@ -189,11 +222,7 @@ function redraw() {
     SHOPPING[i].tally(allRemaining, true);
     var itemTotal = SHOPPING[i].tally({});
     var itemRemaining = SHOPPING[i].tally({}, true);
-    topDiv.appendChild(document.createTextNode('Total: ' + tallyText(itemTotal)));
-    if (!isEmpty(itemRemaining)) {
-      topDiv.appendChild(document.createElement('br'));
-      topDiv.appendChild(document.createTextNode('Remaining: ' + tallyText(itemRemaining)));
-    }
+    topDiv.appendChild(renderTally(itemTotal, itemRemaining));
 
     content.appendChild(topDiv);
   }
@@ -201,11 +230,7 @@ function redraw() {
   if (!isEmpty(allTotal)) {
     var allDiv = document.createElement('div');
     allDiv.className = 'top';
-    allDiv.appendChild(document.createTextNode('All Total: ' + tallyText(allTotal)));
-    if (!isEmpty(allRemaining)) {
-      allDiv.appendChild(document.createElement('br'));
-      allDiv.appendChild(document.createTextNode('All Remaining: ' + tallyText(allRemaining)));
-    }
+    allDiv.appendChild(renderTally(allTotal, allRemaining, 'All '));
     content.appendChild(allDiv);
   }
 
