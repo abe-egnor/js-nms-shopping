@@ -227,7 +227,7 @@ function redraw() {
     content.appendChild(topDiv);
   }
 
-  if (!isEmpty(allTotal)) {
+  if (!isEmpty(allTotal) && SHOPPING.length > 1) {
     var allDiv = document.createElement('div');
     allDiv.className = 'top';
     allDiv.appendChild(renderTally(allTotal, allRemaining, 'All '));
