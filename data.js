@@ -300,5 +300,41 @@ PARTS = {
 NOTES = {
   'iron': 'rocks, asteroids',
   'zinc': 'yellow flowers',
+  'titanium': 'yellow crystals',
+  'heridium': 'pillar deposits',
+  'platinum': 'blue flowers',
+  'chrysonite': 'blue crystals',
+  'carbon': 'vegitation',
+  'thamium9': 'red flowers, asteroids',
+  'plutonium': 'red crystals',
+
+  'nickel': 'asteroids',
+  'iridium': 'asteroids, arch deposits',
+  'copper': 'floating deposits, asteroids',
+  'gold': 'deposits',
+  'aluminium': 'deposits, green crystals',
+  'emeril': 'deposits',
+
+  'candensium': 'radioactive flora',
+  'fervidium': 'hot flora',
+  'spadonium': 'desert flora',
+  'temerium': 'toxic flora',
+  'coryzagen': 'cold flora',
+
+  'tropheum': 'destroyed starships',
+  'mordite': 'killed fauna',
+  'pugneum': 'destroyed drones',
+  'coprite': 'fed fauna',
+
   'antrium': 'glowing cave plants',
+  'rigogen': 'glowing underwater plants',
+
+  'rubeum': 'rocks in red star systems',
+  'viridium': 'deposits in green star systems',
+  'cymatygen': 'deposits in blue star systems',
+
+  'omegon': 'floating crystals',
+  'radnox': 'deposits, floating flora',
+  'murrine': 'ball clusters',
+  'calium': 'blobs',
 };
