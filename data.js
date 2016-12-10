@@ -255,6 +255,7 @@ PARTS = {
   'access ramp':                        {'iron': 20},
   'ladder':                             {'iron': 50},
   'window':                             {'iron': 30, 'glass': 1},
+  'galactic trade terminal':            {'voltaic cell': 6, 'emeril': 500, 'circuit board': 10},
   'Cuboid Rooms': LABEL_NOSPACE,
   'cuboid room':                        {'iron': 100},
   'window (large cuboid)':              {'heridium': 10, 'glass': 1},
