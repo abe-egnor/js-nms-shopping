@@ -17,4 +17,5 @@ Man's Sky.
 ## Links
 
 Live: <https://abe-egnor.github.io/js-nms-shopping/>
+
 Source: <https://github.com/abe-egnor/js-nms-shopping>
